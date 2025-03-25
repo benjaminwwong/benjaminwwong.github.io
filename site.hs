@@ -6,7 +6,7 @@ import           Hakyll
 
 --------------------------------------------------------------------------------
 main :: IO ()
-main = hakyll $ do
+main = hakyllWith config $ do
     match "images/*" $ do
         route   idRoute
         compile copyFileCompiler
@@ -58,7 +58,11 @@ main = hakyll $ do
 
     match "templates/*" $ compile templateBodyCompiler
 
-
+config :: Configuration
+config = defaultConfiguration
+    { destinationDirectory = "docs"
+    , previewPort          = 5000
+    }
 --------------------------------------------------------------------------------
 postCtx :: Context String
 postCtx =
